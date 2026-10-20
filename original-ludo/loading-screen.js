@@ -1,0 +1,24 @@
+// Minimal branded loading screen; the original loader controls completion.
+window.LudoLoadingScreen = {
+  draw(loader) {
+    const ctx = ig.system.context;
+    const width = ig.system.width;
+    const height = ig.system.height;
+    ctx.save();
+    ctx.fillStyle = '#0b0b13';
+    ctx.fillRect(0, 0, width, height);
+    const size = Math.min(width, height) * .16;
+    const centerY = height / 2 - size * .15;
+    if (loader.loadingLogo.loaded) {
+      // The supplied artwork has transparent margins. Fit the visible logo.
+      ctx.drawImage(loader.loadingLogo.data, 292, 302, 698, 676,
+        (width - size) / 2, centerY - size / 2, size, size * 676 / 698);
+    }
+    ctx.fillStyle = '#dddde3';
+    ctx.font = `${Math.max(14, Math.min(width, height) * .032)}px Arial`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('Loading...', width / 2, centerY + size / 2 + 16);
+    ctx.restore();
+  }
+};

@@ -1,0 +1,15 @@
+node_modules/
+.env
+coverage/
+.video-tools/
+.reference/
+*.mp4
+
+# Retired scratch project; the active game and multiplayer client are in original-ludo/.
+/ludo-room/
+/public/
+/bot.js
+/bot.test.js
+/game.js
+/game.test.js
+/server.js
