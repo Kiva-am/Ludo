@@ -16,7 +16,7 @@ Open **http://localhost:3002/**. Keep PowerShell open. Press Ctrl+C to stop.
 
 Node.js 22.13 or newer is required. `npm start` reads `.env`. The game uses port 3002; set `HERO_PORT` if you need another port. The old `PORT=3000` setting does not affect this server.
 
-The self-hosted client does not load the publisher ad SDK, so the ad-blocker prompt will not cover the game. On phones, the client uses its portrait layout and asks you to rotate the phone upright if it is held sideways.
+The self-hosted client does not load the publisher ad SDK, so the ad-blocker prompt will not cover the game. All devices use the mobile portrait layout, centered and fitted without stretching in either orientation. This includes computers and links with `?device=desktop`. The canvas respects phone safe areas, and room controls support touch and scrolling. The supplied Blue Ludo Board Pattern Wallpaper is used on the menu, game and loading screen.
 
 To preview the mobile layout on a computer, open **http://localhost:3002/?device=mobile** in Chrome, press **Ctrl+Shift+M** to enable the device toolbar, and choose a portrait phone size. A phone on the same Wi-Fi can connect to your computer when the server is started with `HERO_HOST=0.0.0.0` in `.env`. Find the computer's IPv4 address with `ipconfig`, then open `http://YOUR_COMPUTER_IP:3002/` on the phone. Keep both devices on the same network. If Windows Firewall asks, allow Node.js on your private network.
 

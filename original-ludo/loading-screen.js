@@ -1,5 +1,6 @@
 // Minimal branded loading screen; the original loader controls completion.
 window.LudoLoadingScreen = {
+  wallpaper: Object.assign(new Image(), { src: 'board-pattern.png' }),
   draw(loader) {
     const ctx = ig.system.context;
     const width = ig.system.width;
@@ -7,6 +8,15 @@ window.LudoLoadingScreen = {
     ctx.save();
     ctx.fillStyle = '#0b0b13';
     ctx.fillRect(0, 0, width, height);
+    const wallpaper = this.wallpaper;
+    if (wallpaper.complete && wallpaper.naturalWidth) {
+      const scale = Math.max(width / wallpaper.naturalWidth, height / wallpaper.naturalHeight);
+      const w = wallpaper.naturalWidth * scale;
+      const h = wallpaper.naturalHeight * scale;
+      ctx.drawImage(wallpaper, (width - w) / 2, (height - h) / 2, w, h);
+      ctx.fillStyle = '#04244866';
+      ctx.fillRect(0, 0, width, height);
+    }
     const size = Math.min(width, height) * .16;
     const centerY = height / 2 - size * .15;
     if (loader.loadingLogo.loaded) {

@@ -1,0 +1,38 @@
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+html, body {
+  height: 100%;
+  height: 100dvh;
+  background: #073967 url('board-pattern.png') center / cover no-repeat fixed;
+  overscroll-behavior: none;
+}
+body { -webkit-tap-highlight-color: transparent; }
+#ajaxbar { background: transparent; }
+#canvas { touch-action: none; }
+#branded-loading {
+  background: #073967 url('board-pattern.png') center / cover no-repeat !important;
+}
+#branded-loading > div {
+  padding: 20px 28px;
+  border-radius: 20px;
+  background: #042448b8;
+}
+#room-dialog {
+  box-sizing: border-box;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  touch-action: pan-y;
+}
+#room-dialog section { max-height: 100%; overscroll-behavior: contain; }
+#room-dialog button, #room-dialog input, #room-dialog select { min-height: 48px; }
+#room-dialog .room-close { width: 44px; min-height: 44px; }
+#room-toast { top: max(12px, env(safe-area-inset-top)); }
+@media (max-width: 480px) {
+  #room-dialog section { padding: 24px 18px 18px; }
+  #room-dialog h2 { padding-right: 24px; font-size: 24px; }
+  #room-dialog p { margin: 10px 0; }
+}
