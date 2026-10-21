@@ -43,18 +43,25 @@
 
   function unlockAudio(event) {
     if (!event.isTrusted || document.hidden) return;
-    // Also unlock the original game's music context. Do not change mute/volume.
-    try {
-      ig.soundHandler?.unlockWebAudio();
-    } catch {
-      // A tap during loading may precede sound initialization; retry next tap.
+    // Resume contexts directly. The bundled Howler code already installs its
+    // own one-time touch unlock listeners; calling unlockWebAudio per tap would
+    // keep adding another set while its asynchronous unlock is still pending.
+    const contexts = new Set([
+      window.Howler?.ctx,
+      window.ig?.webaudio_ctx,
+      window.ig?.soundHandler?.bgmPlayer?.webaudio?.context
+    ]);
+    const resumes = [];
+    for (const context of contexts) {
+      if (context && context.state !== 'running' && context.state !== 'closed') {
+        try {
+          resumes.push(context.resume());
+        } catch {
+          // The browser may refuse to resume a context while backgrounded.
+        }
+      }
     }
-    const context = window.Howler?.ctx;
-    if (context && context.state !== 'running' && context.state !== 'closed') {
-      context.resume()?.then(() => playQueuedSounds()).catch(() => {});
-    } else {
-      playQueuedSounds();
-    }
+    Promise.allSettled(resumes).then(playQueuedSounds);
   }
   for (const event of ['pointerdown', 'pointerup', 'touchend', 'keydown']) {
     document.addEventListener(event, unlockAudio, { capture: true, passive: true });

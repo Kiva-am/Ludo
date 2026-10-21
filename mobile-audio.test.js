@@ -10,7 +10,7 @@ function setup(state = 'running') {
   const events = new Map();
   const windowEvents = new Map();
   const played = [];
-  let now = 0, onStateChange, injection;
+  let now = 0, onStateChange, injection, resumeCalls = 0, legacyUnlockCalls = 0;
   const context = {
     state,
     addEventListener(type, listener) {
@@ -18,6 +18,7 @@ function setup(state = 'running') {
       onStateChange = listener;
     },
     resume() {
+      resumeCalls++;
       this.state = 'running';
       onStateChange?.();
       return Promise.resolve();
@@ -40,14 +41,16 @@ function setup(state = 'running') {
         play(sound) { if (context.state === 'running' && !this.stayMuteFlag) played.push(sound); }
       };
     },
-    unlockWebAudio() {}
+    unlockWebAudio() { legacyUnlockCalls++; }
   };
   injection.init.call(handler);
   ig.soundHandler = handler;
   return {
     player: handler.sfxPlayer, played, context, document, events, sandbox,
     advance(ms) { now += ms; },
-    resume() { return context.resume(); }
+    resume() { return context.resume(); },
+    get resumeCalls() { return resumeCalls; },
+    get legacyUnlockCalls() { return legacyUnlockCalls; }
   };
 }
 
@@ -122,4 +125,14 @@ test('a trusted touch recovers an interrupted audio context', async () => {
   s.events.get('touchend')({isTrusted: true});
   await Promise.resolve();
   assert.deepEqual(s.played, ['dice']);
+});
+
+test('repeated taps resume audio once without reinstalling Howler unlock listeners', async () => {
+  const s = setup('suspended');
+  s.events.get('pointerdown')({isTrusted: true});
+  s.events.get('pointerup')({isTrusted: true});
+  s.events.get('touchend')({isTrusted: true});
+  await Promise.resolve();
+  assert.equal(s.resumeCalls, 1);
+  assert.equal(s.legacyUnlockCalls, 0);
 });

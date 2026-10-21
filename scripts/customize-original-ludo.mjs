@@ -1,8 +1,10 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
+import {patchLocalHostStartup} from './local-host-startup.mjs';
 // Reapply presentation changes from the preserved upstream bundle.
 const input=resolve('.reference/ludo-hero/game.js');
 let source=await readFile(input,'utf8');
+source=patchLocalHostStartup(source);
 // This is a self-hosted build, so do not load the publisher's remote ad SDK
 // (which injects an ad-blocker prompt over the game).
 const gdSdkInjection="document['getElementById']('gamedistribution-jssdk')||(_0x4791f6=document['createElement']('script'),_0x4791f6['id']='gamedistribution-jssdk',_0x4791f6['src']='https://html5.api.gamedistribution.com/main.min.js',_0x21bd92['parentNode']['insertBefore'](_0x4791f6,_0x21bd92)),";
