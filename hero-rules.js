@@ -8,7 +8,7 @@ export function roll(room, playerId, random = () => randomInt(1,7)) {
   if (room.status !== 'playing' || room.players[room.turn].id !== playerId) throw Error('Wait for your turn.');
   if (room.phase !== 'roll') throw Error('Finish your move first.');
   room.dice = random();
-  room.sixes = room.dice === 6 ? room.sixes + 1 : room.sixes;
+  room.sixes = room.dice === 6 ? room.sixes + 1 : 0;
   room.phase = room.sixes === 3 || !legalMoves(room.players[room.turn], room.dice).length ? 'next' : 'move';
   return room.dice;
 }
@@ -37,6 +37,7 @@ export function move(room, playerId, horseId) {
 }
 export function next(room, playerId) {
   if (room.status !== 'playing' || room.players[room.turn].id !== playerId || room.phase !== 'next') throw Error('Turn cannot advance yet.');
-  room.turn = (room.turn + 1) % room.players.length;
+  do { room.turn = (room.turn + 1) % room.players.length; }
+  while (room.players[room.turn].forfeited);
   room.phase = 'roll'; room.sixes = 0; room.dice = null;
 }

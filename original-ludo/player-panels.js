@@ -83,8 +83,10 @@
       ctx.lineWidth = 4;
       ctx.strokeStyle = '#073366';
       ctx.fillStyle = '#fff17b';
-      ctx.strokeText('Your turn', x + w / 2, y - 14);
-      ctx.fillText('Your turn', x + w / 2, y - 14);
+      const deadline = !ig.game.botMode && window.LudoRooms?.state?.deadline;
+      const prompt = deadline ? 'Your turn · ' + Math.max(0, Math.ceil((deadline - Date.now()) / 1000)) + 's' : 'Your turn';
+      ctx.strokeText(prompt, x + w / 2, y - 14);
+      ctx.fillText(prompt, x + w / 2, y - 14);
       ctx.restore();
     }
     ig.game.setTextStyle('16px text', '#fff', 'center');

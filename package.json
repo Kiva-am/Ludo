@@ -6,8 +6,11 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env original-server.js",
     "dev": "node --watch --env-file-if-exists=.env original-server.js",
-    "test": "node --test",
+    "test": "node --test *.test.js",
     "check:multiplayer": "node scripts/check-hero-multiplayer.mjs",
+    "check:browser": "node scripts/check-hero-browser.mjs",
+    "check:browser:four": "node scripts/check-hero-browser.mjs --four",
+    "check:presentation": "node scripts/check-hero-presentation.mjs",
     "download:original": "node scripts/download-original-ludo.mjs"
   },
   "dependencies": {
@@ -15,5 +18,8 @@
     "mongodb": "^6.20.0",
     "socket.io": "^4.8.1",
     "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.0"
   }
 }

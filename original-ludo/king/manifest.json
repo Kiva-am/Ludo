@@ -1,0 +1,145 @@
+{
+  "source": "Captured Ludo King client, assets/main/config.606d4.json",
+  "sounds": {
+    "btnSound": {
+      "file": "btnSound.mp3",
+      "duration": 0.254813
+    },
+    "bgMusic": {
+      "file": "bgMusic.mp3",
+      "duration": 4.728163
+    },
+    "safePoint": {
+      "file": "safePoint.mp3",
+      "duration": 1.750204
+    },
+    "diceRoll": {
+      "file": "diceRoll.mp3",
+      "duration": 0.313469
+    },
+    "tokenMove": {
+      "file": "tokenMove.mp3",
+      "duration": 0.156735
+    },
+    "chat-pop": {
+      "file": "chat-pop.mp3",
+      "duration": 0.130612
+    },
+    "myTurn": {
+      "file": "myTurn.mp3",
+      "duration": 1.776
+    },
+    "tokenKill": {
+      "file": "tokenKill.mp3",
+      "duration": 1.201633
+    },
+    "searching": {
+      "file": "searching.wav",
+      "duration": 1.015873
+    },
+    "time_tiktok": {
+      "file": "time_tiktok.mp3",
+      "duration": 0.130612
+    },
+    "tokenHome": {
+      "file": "tokenHome.mp3",
+      "duration": 1.906939
+    },
+    "startGame": {
+      "file": "startGame.mp3",
+      "duration": 1.38449
+    }
+  },
+  "assets": [
+    {
+      "file": "btnSound.mp3",
+      "source": "assets/main/native/3e/3e033373-4dc9-43ab-8a2c-ccbb967795d8.7be72.mp3",
+      "sha256": "2efff31fe9c1d64d714b5d66a3f140db35f886173b9b000a8fcc32a47d5ad426"
+    },
+    {
+      "file": "bgMusic.mp3",
+      "source": "assets/main/native/42/42c4beb4-9395-4875-91d0-e7b79c92a95d.f4ae5.mp3",
+      "sha256": "eff8498b5ced41a3cdb868e769f9e5d9e05c5e82f01ee8440dc4fcb37b1252f1"
+    },
+    {
+      "file": "safePoint.mp3",
+      "source": "assets/main/native/5b/5bf59bd0-e74f-4029-a181-d984c0c926d7.7f6bc.mp3",
+      "sha256": "d5a6892c948e7a61ad90b43054b9b83aace644aa28a02e33cd8b5e1bd8f69240"
+    },
+    {
+      "file": "diceRoll.mp3",
+      "source": "assets/main/native/67/67a0df2a-c87f-46bf-b27f-a16decce3b93.c9641.mp3",
+      "sha256": "b0354050014e43364b49c96f98c43a348679b9c264b90df4fee922a3fb820fbb"
+    },
+    {
+      "file": "tokenMove.mp3",
+      "source": "assets/main/native/9f/9fb56bcd-e9c1-4502-bfd6-c1d94e6e961b.a9d0b.mp3",
+      "sha256": "3d824bcb7df967bee774985a80e4a25c79a87adab1585cbcd82cfa24539de165"
+    },
+    {
+      "file": "chat-pop.mp3",
+      "source": "assets/main/native/c4/c4027fbf-fbab-4704-bb48-23eb3a96cf48.e279d.mp3",
+      "sha256": "c152fe96d0e57f8b58ebe6601c11ef0e7dc12f539b9bd97b70c59cacd9de10f0"
+    },
+    {
+      "file": "myTurn.mp3",
+      "source": "assets/main/native/ca/cacdc612-ba05-4149-81b6-dfd215ad2a9f.0789d.mp3",
+      "sha256": "457e0e255490877ce89d7fd096fcae1a9a8da8d3dad9b88d437f4143b5234491"
+    },
+    {
+      "file": "tokenKill.mp3",
+      "source": "assets/main/native/cf/cf7b0c59-125e-41e4-8a85-829ad60837bd.7d9eb.mp3",
+      "sha256": "88a629fc362f76361a502ba8ae7266fecbed146d0e229e995aa8e77bef640695"
+    },
+    {
+      "file": "searching.wav",
+      "source": "assets/main/native/ee/ee43125f-1e32-4dd6-bbed-140f013cdea2.fdc89.wav",
+      "sha256": "75d1315d146acf0ca990cc42991baa3754ece83b088063df877925f33dbcd9e5"
+    },
+    {
+      "file": "time_tiktok.mp3",
+      "source": "assets/main/native/ef/ef8e3e20-7be8-42df-8e1b-68b969ffb3f2.a7d75.mp3",
+      "sha256": "5dc09b3f4cf679058111de27dff3072741c6ec11cbc2bde6b8c9d331ebfe8c7d"
+    },
+    {
+      "file": "tokenHome.mp3",
+      "source": "assets/main/native/f0/f033dbdd-5a6c-4ddf-ba1f-ead64a2aba32.1b542.mp3",
+      "sha256": "1b4b177c83d8464fdb627359ba35b71b8b453d9d106299272b3995fa684c76ac"
+    },
+    {
+      "file": "startGame.mp3",
+      "source": "assets/main/native/f1/f1a8591c-c0ef-4d08-89e6-f1b78d92aead.f7ac1.mp3",
+      "sha256": "2632dfd9dcd982a3bf7f239dff99150063e54762a3d9d0012016bb665aa21e70"
+    },
+    {
+      "file": "atlas-193a55a02.png",
+      "source": "assets/main/native/19/193a55a02.ddbed.png",
+      "sha256": "386ca85a2b73fe83bf51d4badbdfbc039f76c8a91c13ae21ce7c299faaf38d29"
+    },
+    {
+      "file": "atlas-1f332d817.png",
+      "source": "assets/main/native/1f/1f332d817.2ca89.png",
+      "sha256": "87c77986c8f845a77226bffaf828e83977fe4aede9468c9a675a3fbc8e2ebfde"
+    },
+    {
+      "file": "atlas-14ca047ba.png",
+      "source": "assets/main/native/14/14ca047ba.1ab73.png",
+      "sha256": "e4472f06ad31cd7e5a4fe700367ad414f312217909cbf47d339c2b0c6225afe4"
+    },
+    {
+      "file": "atlas-1df503a51.png",
+      "source": "assets/main/native/1d/1df503a51.0c37e.png",
+      "sha256": "a1efa8d3065599690f14ea7635df84d123ba610c2b45108448be9d6ca551a1cc"
+    },
+    {
+      "file": "atlas-20f05622-c57f-4f5b-a1b7-01a99c56627d.jpg",
+      "source": "assets/main/native/20/20f05622-c57f-4f5b-a1b7-01a99c56627d.d87af.jpg",
+      "sha256": "c2224768cce345969c9c0c0514ff385bc8932fa891fbe18f532da556039582ab"
+    },
+    {
+      "file": "atlas-116b51b6f.png",
+      "source": "assets/main/native/11/116b51b6f.ab9d2.png",
+      "sha256": "d0a5aa13052507fdacded50d9d04c62a019af374c6c2578821e6c4bb508ae31e"
+    }
+  ]
+}

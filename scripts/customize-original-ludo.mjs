@@ -63,5 +63,6 @@ if(!html.includes('id="branded-loading"'))html=html.replace('<!--body-->','<!--b
 if(!html.includes('src="loading-screen.js"'))html=html.replace('<script src="player-panels.js"></script>','<style>html,body { background: #0b0b13; }</style>\n    <script src="loading-screen.js"></script>\n    <script src="player-panels.js"></script>');
 if(!html.includes('src="player-panels.js"'))html=html.replace('<script type="text/javascript" src="game.js"></script>','<script src="player-panels.js"></script>\n    <script type="text/javascript" src="game.js"></script>');
 if(!html.includes('window.gameStart();'))html=html.replace('<script type="text/javascript" src="game.js"></script>','<script type="text/javascript" src="game.js"></script>\n    <script>window.addEventListener("load",function(){if(typeof window.gameStart==="function")window.gameStart();});</script>');
+if(!html.includes('src="king-presentation.js"'))html=html.replace('<script src="mobile-audio.js"></script>','<script src="mobile-audio.js"></script>\n    <link rel="stylesheet" href="king-presentation.css">\n    <script src="king-presentation.js"></script>');
 await writeFile(indexPath,html);
 console.log(`Applied self-hosted startup, portrait mobile viewport, default menu avatars (${count} references), numbered players and cone player panels.`);

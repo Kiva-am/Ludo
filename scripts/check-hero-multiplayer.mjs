@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {randomBytes} from 'node:crypto';
 const base=process.argv[2]||'http://localhost:3002';
 async function player(){
- const ws=new WebSocket(base.replace(/^http/,'ws')+'/rooms');const messages=[],waiters=[];let seq=0;
- ws.on('message',bytes=>{const msg=JSON.parse(bytes);const i=waiters.findIndex(w=>w.filter(msg));if(i>=0)waiters.splice(i,1)[0].done(msg);else messages.push(msg);});
+ const ws=new WebSocket(base.replace(/^http/,'ws')+'/rooms');const messages=[],waiters=[];let seq=0,revision;
+ ws.on('message',bytes=>{const msg=JSON.parse(bytes);revision=msg.snapshot?.revision??msg.room?.revision??revision;const i=waiters.findIndex(w=>w.filter(msg));if(i>=0)waiters.splice(i,1)[0].done(msg);else messages.push(msg);});
  await new Promise((resolve,reject)=>{ws.once('open',resolve);ws.once('error',reject);});
  const wait=filter=>new Promise((resolve,reject)=>{const i=messages.findIndex(filter);if(i>=0)return resolve(messages.splice(i,1)[0]);const entry={filter,done:msg=>{clearTimeout(timer);resolve(msg);}};const timer=setTimeout(()=>{waiters.splice(waiters.indexOf(entry),1);reject(Error('Timed out waiting for message'));},6000);waiters.push(entry);});
  const token=randomBytes(32).toString('hex');
- return {ws,wait,token,send:msg=>ws.send(JSON.stringify(msg)),async command(action,extra={}){const requestId=++seq;ws.send(JSON.stringify({kind:'command',action,token,requestId,...extra}));const result=await wait(m=>m.kind==='reply'&&m.requestId===requestId);if(result.error)throw Error(result.error);return result;}};
+ return {ws,wait,token,send:msg=>ws.send(JSON.stringify({revision,...msg})),async command(action,extra={}){const requestId=++seq;ws.send(JSON.stringify({kind:'command',action,token,requestId,...extra}));const result=await wait(m=>m.kind==='reply'&&m.requestId===requestId);if(result.error)throw Error(result.error);return result;}};
 }
 const a=await player(),b=await player(),c=await player();
 try{

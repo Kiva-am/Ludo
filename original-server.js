@@ -16,5 +16,11 @@ server.on('error',e=>{console.error(e.code==='EADDRINUSE'?'Port is in use. Stop 
 const port=Number(process.env.HERO_PORT)||3002;
 const host=process.env.HERO_HOST||'127.0.0.1';
 server.listen(port,host,()=>console.log(`Ludo with private rooms: http://${host==='0.0.0.0'?'localhost':host}:${port}`));
-async function shutdown(){for(const s of multiplayer.wss.clients)s.close();multiplayer.wss.close();server.close();await mongo?.close();process.exit(0);}
+let stopping=false;
+async function shutdown(){
+ if(stopping)return;stopping=true;
+ for(const s of multiplayer.wss.clients)s.terminate();
+ await Promise.all([new Promise(resolve=>multiplayer.wss.close(resolve)),new Promise(resolve=>server.close(resolve))]);
+ await multiplayer.flush();await mongo?.close();
+}
 process.on('SIGINT',shutdown);process.on('SIGTERM',shutdown);

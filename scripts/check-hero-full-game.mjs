@@ -7,9 +7,10 @@ const base = process.argv[2] || 'http://localhost:3002';
 async function connect(token = randomBytes(32).toString('hex')) {
   const ws = new WebSocket(base.replace(/^http/, 'ws') + '/rooms');
   const queue = [], waiters = [];
-  let seq = 0;
+  let seq = 0, revision;
   ws.on('message', raw => {
     const msg = JSON.parse(raw);
+    revision = msg.snapshot?.revision ?? msg.room?.revision ?? revision;
     const index = waiters.findIndex(w => w.filter(msg));
     if (index < 0) queue.push(msg);
     else waiters.splice(index, 1)[0].resolve(msg);
@@ -23,7 +24,7 @@ async function connect(token = randomBytes(32).toString('hex')) {
     waiters.push(entry);
   });
   return {ws, token, wait,
-    native(event, data) { ws.send(JSON.stringify({kind:'native', message:{type:52, data:{event,data}}})); },
+    native(event, data) { ws.send(JSON.stringify({kind:'native', revision, message:{type:52, data:{event,data}}})); },
     async command(action, extra = {}) {
       const requestId = ++seq;
       ws.send(JSON.stringify({kind:'command',action,token,requestId,...extra}));

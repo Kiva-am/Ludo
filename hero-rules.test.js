@@ -16,3 +16,10 @@ test('single enemy capture grants another roll; a stack protects pieces',()=>{
 test('home requires an exact roll and completed pieces cannot move',()=>{
  const r=room();r.players[0].pieces=[56,57,57,57];assert.deepEqual(legalMoves(r.players[0],2),[]);roll(r,'a',()=>1);move(r,'a',0);assert.equal(r.status,'finished');assert.equal(r.winner,'a');
 });
+
+test('a non-six resets the consecutive-six count after a bonus roll',()=>{
+ const r=room();r.players[0].pieces=[10,0,0,0];
+ roll(r,'a',()=>6);move(r,'a',0);
+ roll(r,'a',()=>6);move(r,'a',0);
+ roll(r,'a',()=>1);assert.equal(r.sixes,0);
+});
